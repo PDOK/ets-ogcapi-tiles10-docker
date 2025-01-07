@@ -1,16 +1,10 @@
-FROM docker.io/maven:3-eclipse-temurin-8
+FROM docker.io/maven:3-eclipse-temurin-21
 
-# ARG REPO=https://github.com/opengeospatial/ets-ogcapi-tiles10.git
-# ARG REPO_REF="tags/1.1"
-# temporary, until PRs are approved/merged
-ARG REPO=https://github.com/kad-korpem/ets-ogcapi-tiles10.git
-ARG REPO_REF="allow-204-within-limits"
+ARG REPO=https://github.com/opengeospatial/ets-ogcapi-tiles10.git
+ARG REPO_REF="tags/1.2"
 
 WORKDIR /src
 RUN git clone ${REPO} . && git checkout ${REPO_REF}
-
-# temporary, until PRs are approved/merged
-RUN mvn spring-javaformat:apply
 
 RUN mvn clean install
 RUN mv /src/target/ets-ogcapi-tiles10-*-aio.jar /src/target/ets-ogcapi-tiles10-aio.jar
