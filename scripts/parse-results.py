@@ -196,7 +196,7 @@ def main(result_dir, service_url, pretty_print, exit_on_fail):
             console.print("# SKIPPED TEST CASES\n", style="yellow")
             console.print("\n".join(skipped_cases), style="yellow")
 
-    if failed_cases and exit_on_fail:
+    if (failed_cases or errored_cases) and exit_on_fail:
         exit(1)
 
 
